@@ -30,7 +30,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 <!--#if GENERIC-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--#endif-->
-    <title>PDF.js viewer</title>
+    <title>打印预览</title>
 
 <!--#if FIREFOX || MOZCENTRAL-->
 <!--#include viewer-snippet-firefox-extension.html-->
@@ -40,6 +40,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 <!--#endif-->
 
     <link rel="stylesheet" href="viewer.css">
+    <link rel="stylesheet" href="jd/jd_viewer.css">
 <!--#if !PRODUCTION-->
     <link rel="resource" type="application/l10n" href="locale/locale.properties">
 <!--#endif-->
@@ -48,6 +49,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     <script src="../node_modules/systemjs/dist/system.js"></script>
     <script src="../systemjs.config.js"></script>
 <!--#endif-->
+
 
 <!--#if (GENERIC && !MINIFIED) -->
 <!--#include viewer-snippet.html-->
@@ -58,7 +60,8 @@ See https://github.com/adobe-type-tools/cmap-resources
 <!--#else-->
 <!--#include viewer-snippet-minified.html-->
 <!--#endif-->
-
+    <script src="jd/jquery-3.4.1.min.js"></script>
+    <script src="jd/jd.js"></script>
   </head>
 
   <body tabindex="1" class="loadingInProgress">
@@ -238,6 +241,13 @@ See https://github.com/adobe-type-tools/cmap-resources
                   <span data-l10n-id="print_label">Print</span>
                 </button>
 
+                <button id="jd_printsetting" class="toolbarButton print hiddenMediumView" title="打印设置" tabindex="33" >
+                  <span data-l10n-id="print_label">设置</span>
+                </button>
+                <button id="jd_print" class="toolbarButton print hiddenMediumView" title="打印" tabindex="33">
+                  <span >打印</span>
+                </button>
+
                 <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="34" data-l10n-id="download">
                   <span data-l10n-id="download_label">Download</span>
                 </button>
@@ -391,6 +401,9 @@ See https://github.com/adobe-type-tools/cmap-resources
             </div>
           </div>
         </div>
+        <div  id="jd_printdialog" class="container hidden " w3-include-html="jd/viewer-snippet-printdialog.html" align="center"></div>
+        <div  id="jd_printsetting" class="container hidden " w3-include-html="jd/viewer-snippet-printsetting.html" align="center"></div>
+
 <!--#if !(FIREFOX || MOZCENTRAL)-->
         <div id="printServiceOverlay" class="container hidden">
           <div class="dialog">
