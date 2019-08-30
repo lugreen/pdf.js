@@ -28,4 +28,5 @@ function includeHTML() {
 
 $(document).ready(function(){
   includeHTML();
+
 });
