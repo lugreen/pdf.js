@@ -1,3 +1,5 @@
+_baseUrl="http://127.0.0.1:9527/service";
+
 function includeHTML() {
   var z, i, elmnt, file, xhttp;
   /* Loop through a collection of all HTML elements: */
@@ -26,7 +28,34 @@ function includeHTML() {
   }
 }
 
+function loadPrintSettingWin() {
+  console.log("printsetting");
+  $.ajax({
+      type: 'GET',
+      url: _baseUrl+'/print/printerlist',
+      dataType: 'json',
+      success: function (result) {
+        for (var i = 0; i < result.length; i++) {
+          $("#settingPagePrinterName").append("<option value='"+result[i].name+"'>" + result[i].name + "</option>");
+        }
+      },
+      error:function () {
+        alert("获取数据失败","error");
+      }
+  });
+
+  $("#jd_open_printsetting").css({
+    display:"block"
+  });
+  $('#jd_open_printsetting').show();
+}
+
 $(document).ready(function(){
   includeHTML();
-
+  $('#jd_printsetting').on('click',function () {
+    loadPrintSettingWin();
+  });
+  $('#jd_print').on('click',function () {
+    console.log("print");
+  });
 });
