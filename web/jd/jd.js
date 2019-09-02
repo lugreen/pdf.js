@@ -135,7 +135,7 @@ function loadPrintWin() {
     display:"block"
   });
   $('#jd_open_print').show();
-  if ($('#jd_open_printsetting').hasClass("isHide")) {
+  if ($('#jd_open_print').hasClass("isHide")) {
     return;
   }
   //设置打印名称
@@ -146,10 +146,12 @@ function loadPrintWin() {
   });
   //取消事件
   $('.jd_pi_cancel').on('click',function () {
-    $('#jd_print').addClass("isHide");
-    $('#jd_print').hide();
+    $('#jd_open_print').addClass("isHide");
+    $('#jd_open_print').hide();
   });
 }
+
+
 
 $(document).ready(function(){
   includeHTML();
