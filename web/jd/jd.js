@@ -151,7 +151,7 @@ function loadPrintWin() {
   });
 }
 
-
+// http://xxx/service/printviewer/printoptions
 
 $(document).ready(function(){
   includeHTML();
@@ -159,6 +159,7 @@ $(document).ready(function(){
   $('#jd_printsetting').on('click',function () {
     loadPrintSettingWin();
   });
+
   //打印界面
   $('#jd_print').on('click',function () {
     loadPrintWin();
