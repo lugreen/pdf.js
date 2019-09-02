@@ -184,4 +184,5 @@ $(document).ready(function(){
   $('#jd_print').on('click',function () {
     loadPrintWin();
   });
+
 });

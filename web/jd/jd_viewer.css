@@ -52,6 +52,9 @@
 .jd_select-pageSize{
   background-color: #E1E1E1;
   width: 90%;
+  overflow: auto;
+  max-lines: 10;
+
 }
 .jd_select-source{
   background-color: #E1E1E1;
