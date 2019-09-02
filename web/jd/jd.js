@@ -28,7 +28,18 @@ function includeHTML() {
   }
 }
 
+function showMask() {
+  var bh = $("body").height();
+  var bw = $("body").width();
+  $("#printContainer").css({
+    height:bh,
+    width:bw,
+    display:"block"
+  });
+}
+
 function loadPrintSettingWin() {
+  showMask();
   //显示设置界面
   $("#jd_open_printsetting").css({
     display:"block"
@@ -50,7 +61,7 @@ function loadPrintSettingWin() {
   //取消事件
   $('.jd_printsetting_cancel').on('click',function () {
     $('#jd_open_printsetting').addClass("isHide");
-    $('#jd_open_printsetting').hide();
+    $('#jd_open_printsetting,#printContainer').hide();
   });
 
 }
@@ -131,6 +142,7 @@ function onDetermineEvent() {
 }
 
 function loadPrintWin() {
+  showMask();
   $("#jd_open_print").css({
     display:"block"
   });
@@ -147,19 +159,27 @@ function loadPrintWin() {
   //取消事件
   $('.jd_pi_cancel').on('click',function () {
     $('#jd_open_print').addClass("isHide");
-    $('#jd_open_print').hide();
+    $('#jd_open_print,#printContainer').hide();
   });
 }
 
 // http://xxx/service/printviewer/printoptions
 
+function dynamicAppendElement() {
+  // debugger
+  // var div=document.createElement("div");
+  // div.setAttribute({"id":"jd_open_printsetting","w3-include-html":"jd/viewer-snippet-printsetting.html","align":"center","style":"display: none;"});
+  // document.getElementsByTagName('printContainer')[0].appendChild(div);
+}
+
 $(document).ready(function(){
   includeHTML();
+  //动态追加 div 元素
+  dynamicAppendElement();
   //设置界面
   $('#jd_printsetting').on('click',function () {
     loadPrintSettingWin();
   });
-
   //打印界面
   $('#jd_print').on('click',function () {
     loadPrintWin();
