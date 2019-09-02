@@ -29,36 +29,42 @@ function includeHTML() {
 }
 
 function loadPrintSettingWin() {
-  console.log("printsetting");
+  //显示设置界面
+  $("#jd_open_printsetting").css({
+    display:"block"
+  });
+  $('#jd_open_printsetting').show();
+  //加载打印机名称
   $.ajax({
       type: 'GET',
       url: _baseUrl+'/print/pslist',
       dataType: 'json',
       success: function (result) {
         result.forEach(function (val) {
-          $("#settingPagePrinterName").append("<option value='"+val.name+"'>" + val.name + "</option>");
+          $(".jd_set_select-printerName").append("<option value='"+val.name+"'>" + val.name + "</option>");
         });
       },
       error:function () {
         alert("获取数据失败","error");
       }
   });
-  $("#jd_open_printsetting").css({
-    display:"block"
-  });
-  $('#jd_open_printsetting').show();
-  //打印机切换事件
-  $('#settingPagePrinterName').on('change',function () {
+  //打印机名称切换事件
+  $('.jd_set_select-printerName').on('change',function () {
     onPrinterChangeEvent();
   });
-  //打印设置界面确定事件
+  //确定事件
   $('.jd_printsetting_confirm').on('click',function () {
     onDetermineEvent();
   });
+  //取消事件
+  $('.jd_printsetting_cancel').on('click',function () {
+    $('#jd_open_printsetting').hide();
+  });
+
 }
 
 function onPrinterChangeEvent() {
-  var selName = $("#settingPagePrinterName").children('option:selected').val();
+  var selName = $(".jd_set_select-printerName").children('option:selected').val();
   $.ajax({
     type: 'GET',
     url: _baseUrl+'/print/psattributes',
@@ -90,7 +96,7 @@ function onDetermineEvent() {
     contentType: 'application/json',
     success: function (result) {
       PDFViewerApplication.open(_baseUrl+"/print/pdf?id="+result.pdfUrl.values[1]);
-      $('#jd_printsetting').hide();
+      $('#jd_open_printsetting').hide();
     },
     error:function () {
       alert("获取数据失败","error");
@@ -103,12 +109,5 @@ $(document).ready(function(){
   //打开设置界面
   $('#jd_printsetting').on('click',function () {
     loadPrintSettingWin();
-  });
-
-  $('#jd_print').on('click',function () {
-    $("#jd_open_print").css({
-      display:"block"
-    });
-    $('#jd_open_print').show();
   });
 });
