@@ -106,9 +106,11 @@ $(document).ready(function(){
   });
 
   $('#jd_print').on('click',function () {
-    $("#jd_open_print").css({
-      display:"block"
-    });
-    $('#jd_open_print').show();
+
+    if($("#jd_open_print").is(":hidden")){
+      $("#jd_open_print").show();  //如果元素为隐藏,则将它显现
+    }else{
+      $("#jd_open_print").hide();     //如果元素为显现,则将其隐藏
+    }
   });
 });
