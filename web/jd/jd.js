@@ -151,6 +151,8 @@ function loadPrintWin() {
   });
 }
 
+// http://xxx/service/printviewer/printoptions
+
 $(document).ready(function(){
   includeHTML();
   //设置界面
