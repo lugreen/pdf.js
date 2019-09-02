@@ -1,12 +1,15 @@
 /*下面是'打印设置(viewer-snippet-printsetting.html)'界面CSS*/
 .jd_outer{
-
   background-color: #EFEFF0;
   width: 600px;
   height: 460px;
-  margin-left: 28%;
+  position: fixed;
+  left: 400px;
+  top: 100px;
+
+  /*margin-left: 28%;
   position: absolute;
-  margin-top: 5%;
+  margin-top: 5%;*/
 }
 .jd_top{
   width: 540px;
@@ -102,9 +105,12 @@
   background-color: #EFEFF0;
   width: 600px;
   height: 460px;
-  margin-left: 28%;
+  position: fixed;
+  left: 400px;
+  top: 100px;
+  /*margin-left: 28%;
   position: absolute;
-  margin-top: 5%;
+  margin-top: 5%;*/
 }
 .jd_pi_top{
   width: 540px;

@@ -106,10 +106,9 @@ $(document).ready(function(){
   });
 
   $('#jd_print').on('click',function () {
-    console.log("print");
+    $("#jd_open_print").css({
+      display:"block"
+    });
+    $('#jd_open_print').show();
   });
-});
-$('#jd_printsetting').on('click',function () {
-  loadPrintSettingWin();
-
 });
