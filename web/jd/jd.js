@@ -135,10 +135,20 @@ function loadPrintWin() {
     display:"block"
   });
   $('#jd_open_print').show();
+  if ($('#jd_open_printsetting').hasClass("isHide")) {
+    return;
+  }
   //设置打印名称
   loadPrinterNameInfo(".jd_pi_select-printerName");
+  //确定事件
+  $('.jd_pi_confirm').on('click',function () {
 
-
+  });
+  //取消事件
+  $('.jd_pi_cancel').on('click',function () {
+    $('#jd_print').addClass("isHide");
+    $('#jd_print').hide();
+  });
 }
 
 $(document).ready(function(){
