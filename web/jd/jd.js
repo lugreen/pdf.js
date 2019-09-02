@@ -38,21 +38,7 @@ function loadPrintSettingWin() {
     return;
   }
   //加载打印机名称
-  $(".jd_set_select-printerName").empty();
-  $.ajax({
-      type: 'GET',
-      url: _baseUrl+'/print/pslist',
-      dataType: 'json',
-      success: function (result) {
-        result.forEach(function (val) {
-          $(".jd_set_select-printerName").append("<option value='"+val.name+"'>" + val.name + "</option>");
-        });
-        $(".jd_set_select-printerName").trigger("change");
-      },
-      error:function () {
-        alert("获取数据失败","error");
-      }
-  });
+  loadPrinterNameInfo(".jd_set_select-printerName");
   //打印机名称切换事件
   $('.jd_set_select-printerName').on('change',function () {
     onPrinterChangeEvent();
@@ -67,6 +53,24 @@ function loadPrintSettingWin() {
     $('#jd_open_printsetting').hide();
   });
 
+}
+
+function loadPrinterNameInfo(clazz) {
+  $(clazz).empty();
+  $.ajax({
+    type: 'GET',
+    url: _baseUrl+'/print/pslist',
+    dataType: 'json',
+    success: function (result) {
+      result.forEach(function (val) {
+        $(clazz).append("<option value='"+val.name+"'>" + val.name + "</option>");
+      });
+      $(clazz).trigger("change");
+    },
+    error:function () {
+      alert("获取数据失败","error");
+    }
+  });
 }
 
 function onPrinterChangeEvent() {
@@ -113,8 +117,12 @@ function onDetermineEvent() {
     dataType: 'json',
     contentType: 'application/json',
     success: function (result) {
-      PDFViewerApplication.open(_baseUrl+"/print/pdf?id="+result.pdfUrl.values[1]);
-      $('#jd_open_printsetting').hide();
+      if (result && result.pdfUrl.values>0) {
+        PDFViewerApplication.open(_baseUrl+"/print/pdf?id="+result.pdfUrl.values[1]);
+        $('#jd_open_printsetting').hide();
+      } else {
+        alert("没有获取到返回的文件信息");
+      }
     },
     error:function () {
       alert("获取数据失败","error");
@@ -122,10 +130,25 @@ function onDetermineEvent() {
   });
 }
 
+function loadPrintWin() {
+  $("#jd_open_print").css({
+    display:"block"
+  });
+  $('#jd_open_print').show();
+  //设置打印名称
+  loadPrinterNameInfo(".jd_pi_select-printerName");
+
+
+}
+
 $(document).ready(function(){
   includeHTML();
-  //打开设置界面
+  //设置界面
   $('#jd_printsetting').on('click',function () {
     loadPrintSettingWin();
+  });
+  //打印界面
+  $('#jd_print').on('click',function () {
+    loadPrintWin();
   });
 });
