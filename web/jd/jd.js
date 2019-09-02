@@ -34,7 +34,11 @@ function loadPrintSettingWin() {
     display:"block"
   });
   $('#jd_open_printsetting').show();
+  if ($('#jd_open_printsetting').hasClass("isHide")) {
+    return;
+  }
   //加载打印机名称
+  $(".jd_set_select-printerName").empty();
   $.ajax({
       type: 'GET',
       url: _baseUrl+'/print/pslist',
@@ -43,6 +47,7 @@ function loadPrintSettingWin() {
         result.forEach(function (val) {
           $(".jd_set_select-printerName").append("<option value='"+val.name+"'>" + val.name + "</option>");
         });
+        $(".jd_set_select-printerName").trigger("change");
       },
       error:function () {
         alert("获取数据失败","error");
@@ -58,6 +63,7 @@ function loadPrintSettingWin() {
   });
   //取消事件
   $('.jd_printsetting_cancel').on('click',function () {
+    $('#jd_open_printsetting').addClass("isHide");
     $('#jd_open_printsetting').hide();
   });
 
@@ -75,8 +81,20 @@ function onPrinterChangeEvent() {
         //1.设置纸张大小
         $("#jd_select_pageSize").empty();
         var mediaSizeName = result["javax.print.attribute.standard.MediaSizeName"];
-        mediaSizeName.forEach(function (val,i) {
+        mediaSizeName.forEach(function (val) {
           $("#jd_select_pageSize").append("<option value='"+val.value+"'>" + val.text + "</option>");
+        });
+        //2.设置来源
+        $('.jd_select-source').empty();
+        var mediaTray = result["javax.print.attribute.standard.MediaTray"];
+        mediaTray.forEach(function (val) {
+          $('.jd_select-source').append("<option value='"+val.value+"'>" + val.text + "</option>");
+        });
+        //3.打印方向
+        $('.jd_table-right').empty();
+        var orientation = result["javax.print.attribute.standard.OrientationRequested"];
+        orientation.forEach(function (val) {
+          $('.jd_table-right').append("<tr><td><input type='radio' style=\"background-color: white\" name='"+val.name+"' value='"+val.value+"'></td><td>"+val.text+"</td></tr>");
         });
       }
     },
