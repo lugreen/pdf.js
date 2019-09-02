@@ -29,36 +29,48 @@ function includeHTML() {
 }
 
 function loadPrintSettingWin() {
-  console.log("printsetting");
+  //显示设置界面
+  $("#jd_open_printsetting").css({
+    display:"block"
+  });
+  $('#jd_open_printsetting').show();
+  if ($('#jd_open_printsetting').hasClass("isHide")) {
+    return;
+  }
+  //加载打印机名称
+  $(".jd_set_select-printerName").empty();
   $.ajax({
       type: 'GET',
       url: _baseUrl+'/print/pslist',
       dataType: 'json',
       success: function (result) {
         result.forEach(function (val) {
-          $("#settingPagePrinterName").append("<option value='"+val.name+"'>" + val.name + "</option>");
+          $(".jd_set_select-printerName").append("<option value='"+val.name+"'>" + val.name + "</option>");
         });
+        $(".jd_set_select-printerName").trigger("change");
       },
       error:function () {
         alert("获取数据失败","error");
       }
   });
-  $("#jd_open_printsetting").css({
-    display:"block"
-  });
-  $('#jd_open_printsetting').show();
-  //打印机切换事件
-  $('#settingPagePrinterName').on('change',function () {
+  //打印机名称切换事件
+  $('.jd_set_select-printerName').on('change',function () {
     onPrinterChangeEvent();
   });
-  //打印设置界面确定事件
+  //确定事件
   $('.jd_printsetting_confirm').on('click',function () {
     onDetermineEvent();
   });
+  //取消事件
+  $('.jd_printsetting_cancel').on('click',function () {
+    $('#jd_open_printsetting').addClass("isHide");
+    $('#jd_open_printsetting').hide();
+  });
+
 }
 
 function onPrinterChangeEvent() {
-  var selName = $("#settingPagePrinterName").children('option:selected').val();
+  var selName = $(".jd_set_select-printerName").children('option:selected').val();
   $.ajax({
     type: 'GET',
     url: _baseUrl+'/print/psattributes',
@@ -69,8 +81,20 @@ function onPrinterChangeEvent() {
         //1.设置纸张大小
         $("#jd_select_pageSize").empty();
         var mediaSizeName = result["javax.print.attribute.standard.MediaSizeName"];
-        mediaSizeName.forEach(function (val,i) {
+        mediaSizeName.forEach(function (val) {
           $("#jd_select_pageSize").append("<option value='"+val.value+"'>" + val.text + "</option>");
+        });
+        //2.设置来源
+        $('.jd_select-source').empty();
+        var mediaTray = result["javax.print.attribute.standard.MediaTray"];
+        mediaTray.forEach(function (val) {
+          $('.jd_select-source').append("<option value='"+val.value+"'>" + val.text + "</option>");
+        });
+        //3.打印方向
+        $('.jd_table-right').empty();
+        var orientation = result["javax.print.attribute.standard.OrientationRequested"];
+        orientation.forEach(function (val) {
+          $('.jd_table-right').append("<tr><td><input type='radio' style=\"background-color: white\" name='"+val.name+"' value='"+val.value+"'></td><td>"+val.text+"</td></tr>");
         });
       }
     },
@@ -90,7 +114,7 @@ function onDetermineEvent() {
     contentType: 'application/json',
     success: function (result) {
       PDFViewerApplication.open(_baseUrl+"/print/pdf?id="+result.pdfUrl.values[1]);
-      $('#jd_printsetting').hide();
+      $('#jd_open_printsetting').hide();
     },
     error:function () {
       alert("获取数据失败","error");
@@ -104,6 +128,7 @@ $(document).ready(function(){
   $('#jd_printsetting').on('click',function () {
     loadPrintSettingWin();
   });
+<<<<<<< HEAD
 
   $('#jd_print').on('click',function () {
 
@@ -113,4 +138,6 @@ $(document).ready(function(){
       $("#jd_open_print").hide();     //如果元素为显现,则将其隐藏
     }
   });
+=======
+>>>>>>> 3173b9bc1fc8547daae67fef8e52327c5588312b
 });
