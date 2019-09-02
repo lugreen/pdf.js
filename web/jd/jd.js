@@ -1,4 +1,4 @@
-_baseUrl="http://192.168.0.129:9527/service";
+_baseUrl="http://127.0.0.1:9527/service";
 
 function includeHTML() {
   var z, i, elmnt, file, xhttp;
@@ -157,13 +157,10 @@ $(document).ready(function(){
   $('#jd_printsetting').on('click',function () {
     loadPrintSettingWin();
   });
-<<<<<<< HEAD
 
-
-=======
   //打印界面
->>>>>>> 5d547080f309b8ed42125992483ed8ffce3181e3
   $('#jd_print').on('click',function () {
     loadPrintWin();
   });
+
 });
