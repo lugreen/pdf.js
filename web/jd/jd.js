@@ -89,8 +89,8 @@ function onDetermineEvent() {
     dataType: 'json',
     contentType: 'application/json',
     success: function (result) {
-      debugger
-      PDFViewerApplication.load(result.pdfUrl);
+      PDFViewerApplication.open(_baseUrl+"/print/pdf?id="+result.pdfUrl.values[1]);
+      $('#jd_printsetting').hide();
     },
     error:function () {
       alert("获取数据失败","error");
