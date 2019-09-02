@@ -30,3 +30,7 @@ $(document).ready(function(){
   includeHTML();
 
 });
+$('#jd_printsetting').on('click',function () {
+  loadPrintSettingWin();
+
+});
