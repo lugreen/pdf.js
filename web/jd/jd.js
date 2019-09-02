@@ -1,3 +1,5 @@
+_baseUrl="http://127.0.0.1:9527/service";
+
 function includeHTML() {
   var z, i, elmnt, file, xhttp;
   /* Loop through a collection of all HTML elements: */
@@ -26,9 +28,86 @@ function includeHTML() {
   }
 }
 
+function loadPrintSettingWin() {
+  console.log("printsetting");
+  $.ajax({
+      type: 'GET',
+      url: _baseUrl+'/print/pslist',
+      dataType: 'json',
+      success: function (result) {
+        result.forEach(function (val) {
+          $("#settingPagePrinterName").append("<option value='"+val.name+"'>" + val.name + "</option>");
+        });
+      },
+      error:function () {
+        alert("获取数据失败","error");
+      }
+  });
+  $("#jd_open_printsetting").css({
+    display:"block"
+  });
+  $('#jd_open_printsetting').show();
+  //打印机切换事件
+  $('#settingPagePrinterName').on('change',function () {
+    onPrinterChangeEvent();
+  });
+  //打印设置界面确定事件
+  $('.jd_printsetting_confirm').on('click',function () {
+    onDetermineEvent();
+  });
+}
+
+function onPrinterChangeEvent() {
+  var selName = $("#settingPagePrinterName").children('option:selected').val();
+  $.ajax({
+    type: 'GET',
+    url: _baseUrl+'/print/psattributes',
+    data: {psName:selName},
+    dataType: 'json',
+    success: function (result) {
+      if (result) {
+        //1.设置纸张大小
+        $("#jd_select_pageSize").empty();
+        var mediaSizeName = result["javax.print.attribute.standard.MediaSizeName"];
+        mediaSizeName.forEach(function (val,i) {
+          $("#jd_select_pageSize").append("<option value='"+val.value+"'>" + val.text + "</option>");
+        });
+      }
+    },
+    error:function () {
+      alert("获取数据失败","error");
+    }
+  });
+}
+
+function onDetermineEvent() {
+  var data = {url:'https://baidu.com'};
+  $.ajax({
+    type: 'POST',
+    url: _baseUrl+'/print/urltopdf',
+    data: JSON.stringify(data),
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (result) {
+      debugger
+      PDFViewerApplication.load(result.pdfUrl);
+    },
+    error:function () {
+      alert("获取数据失败","error");
+    }
+  });
+}
+
 $(document).ready(function(){
   includeHTML();
+  //打开设置界面
+  $('#jd_printsetting').on('click',function () {
+    loadPrintSettingWin();
+  });
 
+  $('#jd_print').on('click',function () {
+    console.log("print");
+  });
 });
 $('#jd_printsetting').on('click',function () {
   loadPrintSettingWin();
