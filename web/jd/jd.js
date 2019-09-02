@@ -1,4 +1,4 @@
-_baseUrl="http://127.0.0.1:9527/service";
+_baseUrl="http://192.168.0.129:9527/service";
 
 function includeHTML() {
   var z, i, elmnt, file, xhttp;
@@ -128,7 +128,7 @@ $(document).ready(function(){
   $('#jd_printsetting').on('click',function () {
     loadPrintSettingWin();
   });
-<<<<<<< HEAD
+
 
   $('#jd_print').on('click',function () {
 
@@ -138,6 +138,4 @@ $(document).ready(function(){
       $("#jd_open_print").hide();     //如果元素为显现,则将其隐藏
     }
   });
-=======
->>>>>>> 3173b9bc1fc8547daae67fef8e52327c5588312b
 });
