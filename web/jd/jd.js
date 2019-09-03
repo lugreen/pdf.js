@@ -152,10 +152,10 @@ function loadPrintWin() {
   }
 
 
-  /*$('.jd_type').html($('.jd_pi_select-printerName').val());
-  $(".jd_pi_select-printerName").click(function () {
+  $('.jd_type').html($('.jd_pi_select-printerName').val());
+  $(".jd_pi_select-printerName").change(function () {
     $('.jd_type').html($('.jd_pi_select-printerName').val());
-  });*/
+  });
 
   //选择页面范围功能
   $('.jd_fromTo').click(function () {
