@@ -53,8 +53,8 @@
       </tr>
       <tr>
         <td><input type="radio" class="jd_fromTo" id="jd_fromTo" name="jd_range" value="fromTo" ><span style="font-size: 12px">页码范围(G)</span></td>
-        <td><span style="font-size: 12px">从(F):</span><input class="jd_from" id="jd_from"  style="width: 30%" disabled type="number" value="1" name="jd_from"></td>
-        <td><span style="font-size: 12px">到(T):</span><input class="jd_to" id="jd_to"  style="width: 30%" disabled type="number" value="1" name="jd_to"></td>
+        <td><span style="font-size: 12px">从(F):</span><input class="jd_from" id="jd_from"  style="width: 30%" disabled type="number" min="1" value="1" name="jd_from"></td>
+        <td><span style="font-size: 12px">到(T):</span><input class="jd_to" id="jd_to"  style="width: 30%" disabled type="number" min="1" value="1" name="jd_to"></td>
       </tr>
       <tr>
         <td><input type="radio" class="jd_selectRange" id="jd_selectRange" name="jd_range" value="selected"><span style="font-size: 12px">选定范围(S)</span></td>
@@ -66,7 +66,7 @@
   <div class="jd_pi_right">
     <span class="jd_pi_text-printNumbers">份数</span>
     <span style="font-size: 12px;position: relative;left: -30%;top: 21%">份数(C):</span>
-    <span style="position: relative;left: 10%;top: 20%"><input type="number" value="1" style="width: 15%;height: 20px" step="1"></span>
+    <span style="position: relative;left: 10%;top: 20%"><input type="number" min="1" value="1" style="width: 15%;height: 20px" step="1"></span>
 
     <img src="/web/images/jd_Num123.png" style="position: relative;left: -15%;top: 26%">
 
