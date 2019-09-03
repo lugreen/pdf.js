@@ -1,33 +1,5 @@
-_baseUrl="http://127.0.0.1:9527/service";
-
-function includeHTML() {
-  var z, i, elmnt, file, xhttp;
-  /* Loop through a collection of all HTML elements: */
-  z = document.getElementsByTagName("div");
-  for (i = 0; i < z.length; i++) {
-    elmnt = z[i];
-    /*search for elements with a certain atrribute:*/
-    file = elmnt.getAttribute("w3-include-html");
-    if (file) {
-      /* Make an HTTP request using the attribute value as the file name: */
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4) {
-          if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-          if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-          /* Remove the attribute, and call this function once more: */
-          elmnt.removeAttribute("w3-include-html");
-          includeHTML();
-        }
-      }
-      xhttp.open("GET", file, true);
-      xhttp.send();
-      /* Exit the function: */
-      return;
-    }
-  }
-}
-
+$(document).ready(function(){
+_baseUrl='http://127.0.0.1:9527/service';
 function showMask() {
   var bh = $("body").height();
   var bw = $("body").width();
@@ -141,6 +113,13 @@ function onDetermineEvent() {
   });
 }
 
+// <button id="jd_printsetting" class="toolbarButton print hiddenMediumView" title="打印设置" tabindex="33" >
+//   <span data-l10n-id="print_label">设置</span>
+//   </button>
+//   <button id="jd_print" class="toolbarButton print hiddenMediumView" title="打印" tabindex="33">
+//   <span >打印</span>
+//   </button>
+
 function loadPrintWin() {
   showMask();
   $("#jd_open_print").css({
@@ -213,7 +192,7 @@ function dynamicAppendElement() {
   // document.getElementsByTagName('printContainer')[0].appendChild(div);
 }
 
-$(document).ready(function(){
+
   includeHTML();
   //动态追加 div 元素
   dynamicAppendElement();
@@ -225,8 +204,6 @@ $(document).ready(function(){
   $('#jd_print').on('click',function () {
     loadPrintWin();
   });
-
-  //页码选择功能
 });
 
 
