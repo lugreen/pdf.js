@@ -4,34 +4,8 @@
   <meta charset="UTF-8">
   <title>打印设置</title>
   <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
-  <script>
-    $().ready(function () {
-      $('#jd_type').html($('#jd_printerName').val());
-      $("#jd_printerName").change(function () {
-        $('#jd_type').html($('#jd_printerName').val());
-      });
-
-      $('#jd_fromTo').click(function () {
-        $('#jd_from').removeAttr('disabled');
-        $('#jd_to').removeAttr('disabled');
-      });
-      $('#jd_all').click(function () {
-        $('#jd_from').attr('disabled',true);
-        $('#jd_to').attr('disabled',true);
-        $('#jd_from').val(1);
-        $('#jd_to').val(1);
-      });
-      $('#jd_selectRange').click(function () {
-        $('#jd_from').attr('disabled',true);
-        $('#jd_to').attr('disabled',true);
-        $('#jd_from').val(1);
-        $('#jd_to').val(1);
-      });
-
-    });
-
-  </script>
-  <link rel="stylesheet" href="/web/jd/jd_viewer.css">
+  <!--<link rel="stylesheet" href="/web/jd/jd_viewer.css">-->
+  <!--<script src="jd.js"></script>-->
 </head>
 <body>
 <div class="jd_pi_outer" style="z-index: 1111" align="center">
@@ -53,7 +27,7 @@
       </tr>
       <tr>
         <td width=""><span style="width: 100%">类型:</span></td>
-        <td><span id="jd_type"></span></td>
+        <td><span class="jd_type" id="jd_type"></span></td>
         <td></td>
       </tr>
       <tr>
@@ -73,17 +47,17 @@
     <span class="jd_pi_text-printRange">打印范围</span>
     <table class="jd_pi_table-left" align="center">
       <tr>
-        <td align="left" width="34%"><input type="radio" id="jd_all" name="jd_range" value="all" checked><span style="font-size: 12px">全部(A)</span></td>
+        <td align="left" width="34%"><input type="radio" class="jd_all" id="jd_all" name="jd_range" value="all" checked ><span style="font-size: 12px">全部(A)</span></td>
         <td align="center" width="33%"></td>
         <td width="33%" align="right"></td>
       </tr>
       <tr>
-        <td><input type="radio" id="jd_fromTo" name="jd_range" value="fromTo"><span style="font-size: 12px">页码范围(G)</span></td>
-        <td><span style="font-size: 12px">从(F):</span><input id="jd_from"  style="width: 30%" disabled type="number" value="1" name="jd_from"></td>
-        <td><span style="font-size: 12px">到(T):</span><input id="jd_to"  style="width: 30%" disabled type="number" value="1" name="jd_to"></td>
+        <td><input type="radio" class="jd_fromTo" id="jd_fromTo" name="jd_range" value="fromTo" ><span style="font-size: 12px">页码范围(G)</span></td>
+        <td><span style="font-size: 12px">从(F):</span><input class="jd_from" id="jd_from"  style="width: 30%" disabled type="number" value="1" name="jd_from"></td>
+        <td><span style="font-size: 12px">到(T):</span><input class="jd_to" id="jd_to"  style="width: 30%" disabled type="number" value="1" name="jd_to"></td>
       </tr>
       <tr>
-        <td><input type="radio" id="jd_selectRange" name="jd_range" value="selected"><span style="font-size: 12px">选定范围(S)</span></td>
+        <td><input type="radio" class="jd_selectRange" id="jd_selectRange" name="jd_range" value="selected"><span style="font-size: 12px">选定范围(S)</span></td>
         <td></td>
         <td></td>
       </tr>
