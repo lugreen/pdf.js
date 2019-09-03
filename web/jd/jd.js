@@ -150,11 +150,13 @@ function loadPrintWin() {
   if ($('#jd_open_print').hasClass("isHide")) {
     return;
   }
-  //选择页面范围功能
-  /*$('.jd_type').html($('#jd_printerName').val());
-  $(".jd_pi_select-printerName").change(function () {
+
+  /*$('.jd_type').html($('.jd_pi_select-printerName').val());
+  $(".jd_pi_select-printerName").click(function () {
     $('.jd_type').html($('.jd_pi_select-printerName').val());
   });*/
+
+  //选择页面范围功能
   $('.jd_fromTo').click(function () {
     $('.jd_from').removeAttr('disabled');
     $('.jd_to').removeAttr('disabled');
