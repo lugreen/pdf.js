@@ -129,31 +129,6 @@ function loadPrintWin() {
   if ($('#jd_open_print').hasClass("isHide")) {
     return;
   }
-
-
-  /*$('.jd_type').html($('.jd_pi_select-printerName').val());
-  $(".jd_pi_select-printerName").click(function () {
-    $('.jd_type').html($('.jd_pi_select-printerName').val());
-  });*/
-
-  //选择页面范围功能
-  $('.jd_fromTo').click(function () {
-    $('.jd_from').removeAttr('disabled');
-    $('.jd_to').removeAttr('disabled');
-  });
-  $('.jd_all').click(function () {
-    $('.jd_from').attr('disabled',true);
-    $('.jd_to').attr('disabled',true);
-    $('.jd_from').val(1);
-    $('.jd_to').val(1);
-  });
-  $('.jd_selectRange').click(function () {
-    $('.jd_from').attr('disabled',true);
-    $('.jd_to').attr('disabled',true);
-    $('.jd_from').val(1);
-    $('.jd_to').val(1);
-  });
-
   //设置打印名称
   loadPrinterNameInfo(".jd_pi_select-printerName");
   //选择页面范围功能
@@ -204,8 +179,6 @@ function dynamicAppendElement() {
   $('#jd_print').on('click',function () {
     loadPrintWin();
   });
-
-  //页码选择功能
 });
 
 
