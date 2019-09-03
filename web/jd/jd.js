@@ -151,6 +151,7 @@ function loadPrintWin() {
     return;
   }
 
+
   /*$('.jd_type').html($('.jd_pi_select-printerName').val());
   $(".jd_pi_select-printerName").click(function () {
     $('.jd_type').html($('.jd_pi_select-printerName').val());
@@ -174,9 +175,17 @@ function loadPrintWin() {
     $('.jd_to').val(1);
   });
 
-
   //设置打印名称
   loadPrinterNameInfo(".jd_pi_select-printerName");
+  //选择页面范围功能
+  $(":radio").on('click',function () {
+    if ($(this).attr("class") === "jd_fromTo") {
+      $('.jd_from').removeAttr('disabled');
+      $('.jd_to').removeAttr('disabled');
+    } else {
+      setPageNumber();
+    }
+  });
   //确定事件
   $('.jd_pi_confirm').on('click',function () {
 
@@ -186,6 +195,13 @@ function loadPrintWin() {
     $('#jd_open_print').addClass("isHide");
     $('#jd_open_print,#printContainer').hide();
   });
+}
+//设置页码
+function setPageNumber() {
+  $('.jd_from').attr('disabled',true);
+  $('.jd_to').attr('disabled',true);
+  $('.jd_from').val(1);
+  $('.jd_to').val(1);
 }
 
 // http://xxx/service/printviewer/printoptions
